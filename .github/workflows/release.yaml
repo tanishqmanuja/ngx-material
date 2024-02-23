@@ -54,5 +54,5 @@ jobs:
       - name: Bump version and Publish
         run: |
           cd dist/ngx-material
-          npm version${{ github.event.inputs.bump }}
+          npm version ${{ github.event.inputs.bump }}
           npm publish
