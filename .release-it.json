@@ -2,7 +2,8 @@
   "git": {
     "tagName": "v${version}",
     "commitMessage": "chore: release v${version}",
-    "pushRepo": "https://github.com/tanishqmanuja/ngx-material"
+    "pushRepo": "https://github.com/tanishqmanuja/ngx-material",
+    "requireCleanWorkingDir": false
   },
   "github": {
     "release": false
