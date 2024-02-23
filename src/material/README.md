@@ -1,3 +1,3 @@
 # ngx-material
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+A proof of concept wrapper around [material-web](https://github.com/material-components/material-web)

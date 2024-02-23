@@ -1,0 +1,22 @@
+{
+  "git": {
+    "tagName": "v${version}",
+    "commitMessage": "chore: release v${version}",
+    "pushRepo": "https://github.com/tanishqmanuja/ngx-material"
+  },
+  "github": {
+    "release": false
+  },
+  "npm": {
+    "publish": true,
+    "publishPath": "dist/ngx-material"
+  },
+  "hooks": {
+    "after:bump": ["bun run build"]
+  },
+  "plugins": {
+    "@release-it/bumper": {
+      "out": "src/material/package.json"
+    }
+  }
+}
