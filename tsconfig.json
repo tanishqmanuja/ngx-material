@@ -9,7 +9,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "ngx-material": ["./dist/ngx-material"]
+      "@tqman/ngx-material/*": ["./src/material/*"],
+      "@tqman/ngx-material": ["./src/material"]
     },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,

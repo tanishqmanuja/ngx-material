@@ -1,5 +1,5 @@
 {
-  "name": "@tqman/ngx-material",
+  "name": "@root/ngx-material",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
