@@ -48,8 +48,11 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Build & Publish
-        run: bun run release ${{ github.event.inputs.bump }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build
+        run: bun run build
+
+      - name: Bump version and Publish
+        run: |
+          cd dist/ngx-material
+          npm version${{ github.event.inputs.bump }}
+          npm publish
