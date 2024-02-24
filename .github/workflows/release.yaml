@@ -51,8 +51,18 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Bump version and Publish
+      - name: Bump version
+        run: |
+          cd src/material
+          npm version ${{ github.event.inputs.bump }}
+
+      - name: Publish
         run: |
           cd dist/ngx-material
-          npm version ${{ github.event.inputs.bump }}
           npm publish
+
+      - name: Commit
+        run: |
+          git add .
+          git commit -m "chore: bump version"
+          git push
