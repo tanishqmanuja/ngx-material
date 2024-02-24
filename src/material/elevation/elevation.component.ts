@@ -1,4 +1,5 @@
-import "@material/web/elevation/elevation.js";
+import "@material/web/elevation/elevation";
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -9,7 +10,7 @@ import {
 @Component({
   selector: "md-elevation",
   standalone: true,
-  template: ` <ng-content></ng-content>`,
+  template: ` <ng-content />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdElevationComponent {

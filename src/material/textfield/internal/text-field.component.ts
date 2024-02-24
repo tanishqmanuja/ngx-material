@@ -5,6 +5,7 @@ import {
   ElementRef,
   NgZone,
   Renderer2,
+  booleanAttribute,
   inject,
 } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
@@ -13,17 +14,16 @@ import type {
   TextFieldType,
   UnsupportedTextFieldType,
 } from "@material/web/textfield/internal/text-field";
-import { coerceBooleanProperty } from "../../../utils/coercion";
 
 @Component({
   selector: "md-text-field",
-  template: `<ng-content></ng-content>`,
+  template: `<ng-content />`,
   inputs: [
-    { name: "disabled", transform: coerceBooleanProperty },
-    { name: "error", transform: coerceBooleanProperty },
-    { name: "required", transform: coerceBooleanProperty },
-    { name: "hasLeadingIcon", transform: coerceBooleanProperty },
-    { name: "hasTrailingIcon", transform: coerceBooleanProperty },
+    { name: "disabled", transform: booleanAttribute },
+    { name: "error", transform: booleanAttribute },
+    { name: "required", transform: booleanAttribute },
+    { name: "hasLeadingIcon", transform: booleanAttribute },
+    { name: "hasTrailingIcon", transform: booleanAttribute },
     { name: "value" },
     { name: "label" },
     { name: "supportingText" },

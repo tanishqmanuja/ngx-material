@@ -6,11 +6,11 @@ import {
   Component,
   ElementRef,
   NgZone,
+  booleanAttribute,
   inject,
 } from "@angular/core";
 import type { FabSize, FabVariant, MdFab } from "@material/web/fab/fab";
-import { coerceBooleanProperty } from "../../utils/coercion";
-import { ProxyCmp } from "../../utils/proxy-cmp";
+import { ProxyCmp } from "@tqman/ngx-material/internal";
 
 @ProxyCmp({ inputs: ["label", "size", "variant", "lowered"] })
 @Component({
@@ -21,7 +21,7 @@ import { ProxyCmp } from "../../utils/proxy-cmp";
     { name: "label", transform: (v: string) => v },
     { name: "size", transform: (v: FabSize) => v },
     { name: "variant", transform: (v: FabVariant) => v },
-    { name: "lowered", transform: coerceBooleanProperty },
+    { name: "lowered", transform: booleanAttribute },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,18 +1,23 @@
-import { Component, ElementRef, Input, NgZone, inject } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Input,
+  NgZone,
+  booleanAttribute,
+  inject,
+} from "@angular/core";
 
 import type { Field } from "@material/web/field/internal/field";
 
-import { coerceBooleanProperty } from "../../../utils/coercion";
-
 @Component({
   selector: "md-field",
-  template: `<ng-content></ng-content>`,
+  template: `<ng-content />`,
 })
 export class MdFieldComponent {
   private el: Field = inject(ElementRef).nativeElement;
   private ngZone = inject(NgZone);
 
-  @Input({ transform: coerceBooleanProperty })
+  @Input({ transform: booleanAttribute })
   set disabled(v) {
     this.ngZone.runOutsideAngular(() => {
       this.el.disabled = v;
@@ -22,7 +27,7 @@ export class MdFieldComponent {
     return this.el.disabled;
   }
 
-  @Input({ transform: coerceBooleanProperty })
+  @Input({ transform: booleanAttribute })
   set error(v) {
     this.ngZone.runOutsideAngular(() => {
       this.el.error = v;
@@ -32,7 +37,7 @@ export class MdFieldComponent {
     return this.el.error;
   }
 
-  @Input({ transform: coerceBooleanProperty })
+  @Input({ transform: booleanAttribute })
   set required(v) {
     this.ngZone.runOutsideAngular(() => {
       this.el.required = v;

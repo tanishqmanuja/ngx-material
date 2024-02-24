@@ -6,20 +6,21 @@ import {
   ElementRef,
   NgZone,
   Renderer2,
+  booleanAttribute,
   inject,
 } from "@angular/core";
-import { coerceBooleanProperty } from "../../utils/coercion";
-import { provideValueAccessor } from "../../utils/value-accessor";
 
 import { MdRadio } from "@material/web/radio/radio";
 
+import { provideValueAccessor } from "@tqman/ngx-material/internal";
+
 @Component({
-  standalone: true,
   selector: "md-radio",
-  template: ` <ng-content></ng-content>`,
+  standalone: true,
+  template: ` <ng-content />`,
   inputs: [
-    { name: "checked", transform: coerceBooleanProperty },
-    { name: "disabled", transform: coerceBooleanProperty },
+    { name: "checked", transform: booleanAttribute },
+    { name: "disabled", transform: booleanAttribute },
     { name: "value" },
     { name: "name" },
   ],
@@ -52,7 +53,7 @@ export class MdRadioComponent {
   }
   set disabled(v) {
     this.ngZone.runOutsideAngular(() => {
-      this.el.disabled = coerceBooleanProperty(v);
+      this.el.disabled = v;
     });
   }
 

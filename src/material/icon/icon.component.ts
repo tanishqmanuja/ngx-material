@@ -1,4 +1,4 @@
-import "@material/web/icon/icon.js";
+import "@material/web/icon/icon";
 
 import {
   ChangeDetectionStrategy,

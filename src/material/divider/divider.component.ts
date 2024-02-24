@@ -1,4 +1,4 @@
-import "@material/web/divider/divider.js";
+import "@material/web/divider/divider";
 
 import {
   ChangeDetectionStrategy,
