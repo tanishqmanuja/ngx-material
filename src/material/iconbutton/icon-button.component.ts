@@ -31,8 +31,8 @@ type LinkTarget = "_blank" | "_parent" | "_self" | "_top";
     { name: "target" },
   ],
   host: {
-    "(change)": "_onChange($event.target.selected)",
-    "(blur)": "_onTouched()",
+    "(change)": "onChange($event.target.selected)",
+    "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdIconButtonComponent)],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,15 +94,15 @@ export class MdIconButtonComponent implements ControlValueAccessor {
   /* Control Value Accessor */
   private renderer = inject(Renderer2);
 
-  protected _onChange = (_value: MdIconButton["selected"]) => {};
-  protected _onTouched = () => {};
+  protected onChange = (_value: MdIconButton["selected"]) => {};
+  protected onTouched = () => {};
 
-  registerOnChange(onChange: (value: MdIconButton["selected"]) => void): void {
-    this._onChange = onChange;
+  registerOnChange(fn: (value: MdIconButton["selected"]) => void): void {
+    this.onChange = fn;
   }
 
-  registerOnTouched(onTouched: () => void): void {
-    this._onTouched = onTouched;
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 
   writeValue(value: boolean) {

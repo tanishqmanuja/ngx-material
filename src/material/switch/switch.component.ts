@@ -30,8 +30,8 @@ import { provideValueAccessor } from "@tqman/ngx-material/internal";
     { name: "name" },
   ],
   host: {
-    "(change)": "_onChange($event.target.selected)",
-    "(blur)": "_onTouched()",
+    "(change)": "onChange($event.target.selected)",
+    "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdSwitchComponent)],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -102,15 +102,15 @@ export class MdSwitchComponent implements ControlValueAccessor {
   /* Control Value Accessor */
   private renderer = inject(Renderer2);
 
-  protected _onChange = (_value: MdSwitch["selected"]) => {};
-  protected _onTouched = () => {};
+  protected onChange = (_value: MdSwitch["selected"]) => {};
+  protected onTouched = () => {};
 
-  registerOnChange(onChange: (value: MdSwitch["selected"]) => void) {
-    this._onChange = onChange;
+  registerOnChange(fn: (value: MdSwitch["selected"]) => void) {
+    this.onChange = fn;
   }
 
-  registerOnTouched(onTouched: () => void): void {
-    this._onTouched = onTouched;
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 
   writeValue(value: boolean) {

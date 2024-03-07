@@ -13,6 +13,7 @@ import {
 import { provideValueAccessor } from "@tqman/ngx-material/internal";
 
 import type { MdCheckbox } from "@material/web/checkbox/checkbox";
+import { ControlValueAccessor } from "@angular/forms";
 
 @Component({
   selector: "md-checkbox",
@@ -31,7 +32,7 @@ import type { MdCheckbox } from "@material/web/checkbox/checkbox";
   },
   providers: [provideValueAccessor(MdCheckboxComponent)],
 })
-export class MdCheckboxComponent {
+export class MdCheckboxComponent implements ControlValueAccessor {
   private el: MdCheckbox = inject(ElementRef).nativeElement;
   private ngZone = inject(NgZone);
   private cdRef = inject(ChangeDetectorRef);

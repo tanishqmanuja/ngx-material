@@ -13,6 +13,7 @@ import {
 import { MdRadio } from "@material/web/radio/radio";
 
 import { provideValueAccessor } from "@tqman/ngx-material/internal";
+import { ControlValueAccessor } from "@angular/forms";
 
 @Component({
   selector: "md-radio",
@@ -30,7 +31,7 @@ import { provideValueAccessor } from "@tqman/ngx-material/internal";
   },
   providers: [provideValueAccessor(MdRadio)],
 })
-export class MdRadioComponent {
+export class MdRadioComponent implements ControlValueAccessor {
   private el: MdRadio = inject(ElementRef).nativeElement;
   private ngZone = inject(NgZone);
   private cdRef = inject(ChangeDetectorRef);
