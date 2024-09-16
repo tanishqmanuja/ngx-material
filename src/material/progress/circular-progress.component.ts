@@ -1,37 +1,13 @@
 import "@material/web/progress/circular-progress";
 
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  inject,
-  NgZone,
-  numberAttribute,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
-import { ProxyCmp } from "@tqman/ngx-material/internal";
+import { MdProgressBase } from "./internal/progress.directive";
 
-@ProxyCmp({ inputs: ["value", "max", "indeterminate", "fourColor"] })
 @Component({
   selector: "md-circular-progress",
   standalone: true,
   template: ` <ng-content />`,
-  inputs: [
-    { name: "value", transform: numberAttribute },
-    { name: "max", transform: numberAttribute },
-    { name: "indeterminate", transform: booleanAttribute },
-    { name: "fourColor", transform: booleanAttribute },
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdCircularProgressComponent {
-  protected el = inject(ElementRef).nativeElement;
-  protected ngZone = inject(NgZone);
-  private cdRef = inject(ChangeDetectorRef);
-
-  constructor() {
-    this.cdRef.detach();
-  }
-}
+export class MdCircularProgressComponent extends MdProgressBase {}
