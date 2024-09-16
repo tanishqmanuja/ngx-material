@@ -1,28 +1,34 @@
 import "@material/web/chips/input-chip";
 
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  booleanAttribute,
 } from "@angular/core";
 
 import { ProxyCmp } from "@tqman/ngx-material/internal";
-import { MdChipComponent } from "./internal/chip.component";
 
-type MdInputChipTarget = "_blank" | "_parent" | "_self" | "_top" | "";
+import { MdChipBase } from "./internal/chip.component";
 
-@ProxyCmp({ inputs: ["avatar", "removeOnly", "selected", "href", "target"] })
+export type MdInputChipTarget = "_blank" | "_parent" | "_self" | "_top" | "";
+
+const INPUT_CHIP_INPUTS = [
+  { name: "avatar", transform: booleanAttribute },
+  { name: "href" },
+  {
+    name: "target",
+    transform: (v: MdInputChipTarget) => v,
+  },
+  { name: "removeOnly", transform: booleanAttribute },
+  { name: "selected", transform: booleanAttribute },
+];
+
+@ProxyCmp({ inputs: INPUT_CHIP_INPUTS })
 @Component({
   selector: "md-input-chip",
   standalone: true,
   template: `<ng-content />`,
-  inputs: [
-    { name: "avatar", transform: booleanAttribute },
-    { name: "removeOnly", transform: booleanAttribute },
-    { name: "selected", transform: booleanAttribute },
-    { name: "href" },
-    { name: "target", transform: (v: string) => v as MdInputChipTarget },
-  ],
+  inputs: INPUT_CHIP_INPUTS,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdInputChipComponent extends MdChipComponent {}
+export class MdInputChipComponent extends MdChipBase {}

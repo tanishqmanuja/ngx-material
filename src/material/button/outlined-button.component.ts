@@ -2,7 +2,7 @@ import "@material/web/button/outlined-button.js";
 
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 
-import { MdButtonComponent } from "./internal/button.component";
+import { MdButtonBase } from "./internal/button.directive";
 
 @Component({
   selector: "md-outlined-button",
@@ -10,4 +10,4 @@ import { MdButtonComponent } from "./internal/button.component";
   template: ` <ng-content />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdOutlinedButtonComponent extends MdButtonComponent {}
+export class MdOutlinedButtonComponent extends MdButtonBase {}

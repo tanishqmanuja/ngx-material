@@ -32,7 +32,7 @@ export class MdIconFontDirective {
       this.el,
       "--md-icon-font",
       mdIconFontMap[v],
-      RendererStyleFlags2.DashCase
+      RendererStyleFlags2.DashCase,
     );
   }
 }

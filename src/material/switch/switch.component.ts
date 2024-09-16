@@ -13,22 +13,24 @@ import {
 import { ControlValueAccessor } from "@angular/forms";
 
 import type { MdSwitch } from "@material/web/switch/switch";
+import { provideValueAccessor, ProxyCmp } from "@tqman/ngx-material/internal";
 
-import { provideValueAccessor } from "@tqman/ngx-material/internal";
+const SWITCH_INPUTS = [
+  { name: "selected", transform: booleanAttribute },
+  { name: "icons", transform: booleanAttribute },
+  { name: "showOnlySelectedIcon", transform: booleanAttribute },
+  { name: "required", transform: booleanAttribute },
+  { name: "value" },
+  { name: "name" },
+  { name: "disabled", transform: booleanAttribute },
+];
 
+@ProxyCmp({ inputs: SWITCH_INPUTS })
 @Component({
   selector: "md-switch",
   standalone: true,
   template: `<ng-content />`,
-  inputs: [
-    { name: "checked", transform: booleanAttribute },
-    { name: "disabled", transform: booleanAttribute },
-    { name: "selected", transform: booleanAttribute },
-    { name: "icons", transform: booleanAttribute },
-    { name: "showOnlySelectedIcon", transform: booleanAttribute },
-    { name: "value" },
-    { name: "name" },
-  ],
+  inputs: SWITCH_INPUTS,
   host: {
     "(change)": "onChange($event.target.selected)",
     "(blur)": "onTouched()",
@@ -37,66 +39,12 @@ import { provideValueAccessor } from "@tqman/ngx-material/internal";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdSwitchComponent implements ControlValueAccessor {
-  private el: MdSwitch = inject(ElementRef).nativeElement;
-  private ngZone = inject(NgZone);
+  protected el: MdSwitch = inject(ElementRef).nativeElement;
+  protected ngZone = inject(NgZone);
   private cdRef = inject(ChangeDetectorRef);
 
   constructor() {
     this.cdRef.detach();
-  }
-
-  get disabled() {
-    return this.el.disabled;
-  }
-  set disabled(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.disabled = v;
-    });
-  }
-
-  get selected() {
-    return this.el.selected;
-  }
-  set selected(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.selected = v;
-    });
-  }
-
-  get icons() {
-    return this.el.icons;
-  }
-  set icons(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.icons = v;
-    });
-  }
-
-  get showOnlySelectedIcon() {
-    return this.el.showOnlySelectedIcon;
-  }
-  set showOnlySelectedIcon(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.showOnlySelectedIcon = v;
-    });
-  }
-
-  get value() {
-    return this.el.value;
-  }
-  set value(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.value = v;
-    });
-  }
-
-  get name() {
-    return this.el.name;
-  }
-  set name(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.name = v;
-    });
   }
 
   /* Control Value Accessor */

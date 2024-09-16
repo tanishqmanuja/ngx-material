@@ -1,31 +1,32 @@
 import "@material/web/chips/filter-chip";
 
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  Renderer2,
-  booleanAttribute,
   inject,
+  Renderer2,
 } from "@angular/core";
-
-import { ProxyCmp } from "@tqman/ngx-material/internal";
-import { provideValueAccessor } from "@tqman/ngx-material/internal";
-
-import { MdChipComponent } from "./internal/chip.component";
-import { MdFilterChip } from "@material/web/chips/filter-chip";
 import { ControlValueAccessor } from "@angular/forms";
 
-@ProxyCmp({ inputs: ["elevated", "removable", "selected", "hasSelectedIcon"] })
+import { MdFilterChip } from "@material/web/chips/filter-chip";
+import { provideValueAccessor, ProxyCmp } from "@tqman/ngx-material/internal";
+
+import { MdChipBase } from "./internal/chip.component";
+
+const FILTER_CHIP_INPUTS = [
+  { name: "elevated", transform: booleanAttribute },
+  { name: "removable", transform: booleanAttribute },
+  { name: "selected", transform: booleanAttribute },
+  { name: "hasSelectedIcon", transform: booleanAttribute },
+];
+
+@ProxyCmp({ inputs: FILTER_CHIP_INPUTS })
 @Component({
   selector: "md-filter-chip",
   standalone: true,
   template: `<ng-content />`,
-  inputs: [
-    { name: "elevated", transform: booleanAttribute },
-    { name: "removable", transform: booleanAttribute },
-    { name: "selected", transform: booleanAttribute },
-    { name: "hasSelectedIcon", transform: booleanAttribute },
-  ],
+  inputs: FILTER_CHIP_INPUTS,
   host: {
     "(click)": "onChange($event.target.selected)",
     "(blur)": "onTouched()",
@@ -34,7 +35,7 @@ import { ControlValueAccessor } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdFilterChipComponent
-  extends MdChipComponent
+  extends MdChipBase
   implements ControlValueAccessor
 {
   private renderer = inject(Renderer2);

@@ -1,15 +1,16 @@
 import "@material/web/textfield/outlined-text-field";
 
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 import { provideValueAccessor } from "@tqman/ngx-material/internal";
 
-import { MdTextFieldComponent } from "./internal/text-field.component";
+import { MdTextFieldBase } from "./internal/text-field.component";
 
 @Component({
   selector: "md-outlined-text-field",
   standalone: true,
   template: ` <ng-content />`,
   providers: [provideValueAccessor(MdOutlinedTextFieldComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdOutlinedTextFieldComponent extends MdTextFieldComponent {}
+export class MdOutlinedTextFieldComponent extends MdTextFieldBase {}

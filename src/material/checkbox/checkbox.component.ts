@@ -1,31 +1,36 @@
 import "@material/web/checkbox/checkbox";
 
 import {
+  booleanAttribute,
   ChangeDetectorRef,
   Component,
   ElementRef,
+  inject,
   NgZone,
   Renderer2,
-  booleanAttribute,
-  inject,
 } from "@angular/core";
-
-import { provideValueAccessor } from "@tqman/ngx-material/internal";
-
-import type { MdCheckbox } from "@material/web/checkbox/checkbox";
 import { ControlValueAccessor } from "@angular/forms";
 
+import type { MdCheckbox } from "@material/web/checkbox/checkbox";
+import { provideValueAccessor, ProxyCmp } from "@tqman/ngx-material/internal";
+
+const CHECKBOX_INPUTS = [
+  { name: "checked", transform: booleanAttribute },
+  { name: "indeterminate", transform: booleanAttribute },
+  { name: "required", transform: booleanAttribute },
+  { name: "value" },
+  { name: "disabled", transform: booleanAttribute },
+  { name: "name" },
+];
+
+@ProxyCmp({
+  inputs: CHECKBOX_INPUTS,
+})
 @Component({
   selector: "md-checkbox",
   standalone: true,
   template: ` <ng-content />`,
-  inputs: [
-    { name: "checked", transform: booleanAttribute },
-    { name: "disabled", transform: booleanAttribute },
-    { name: "indeterminate", transform: booleanAttribute },
-    { name: "value" },
-    { name: "name" },
-  ],
+  inputs: CHECKBOX_INPUTS,
   host: {
     "(change)": "onChange($event.target.checked)",
     "(blur)": "onTouched()",
@@ -33,57 +38,12 @@ import { ControlValueAccessor } from "@angular/forms";
   providers: [provideValueAccessor(MdCheckboxComponent)],
 })
 export class MdCheckboxComponent implements ControlValueAccessor {
-  private el: MdCheckbox = inject(ElementRef).nativeElement;
-  private ngZone = inject(NgZone);
+  protected el: MdCheckbox = inject(ElementRef).nativeElement;
+  protected ngZone = inject(NgZone);
   private cdRef = inject(ChangeDetectorRef);
 
   constructor() {
     this.cdRef.detach();
-  }
-
-  get checked() {
-    return this.el.checked;
-  }
-  set checked(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.checked = v;
-    });
-  }
-
-  get disabled() {
-    return this.el.disabled;
-  }
-  set disabled(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.disabled = v;
-    });
-  }
-
-  get indeterminate() {
-    return this.el.indeterminate;
-  }
-  set indeterminate(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.indeterminate = v;
-    });
-  }
-
-  get value() {
-    return this.el.value;
-  }
-  set value(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.value = v;
-    });
-  }
-
-  get name() {
-    return this.el.name;
-  }
-  set name(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.name = v;
-    });
   }
 
   /* Control Value Accessor */

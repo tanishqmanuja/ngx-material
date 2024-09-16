@@ -17,6 +17,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
+    "isolatedModules": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,

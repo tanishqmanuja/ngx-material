@@ -1,15 +1,16 @@
 import "@material/web/textfield/filled-text-field";
 
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 import { provideValueAccessor } from "@tqman/ngx-material/internal";
 
-import { MdTextFieldComponent } from "./internal/text-field.component";
+import { MdTextFieldBase } from "./internal/text-field.component";
 
 @Component({
   selector: "md-filled-text-field",
   standalone: true,
   template: ` <ng-content />`,
   providers: [provideValueAccessor(MdFilledTextFieldComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdFilledTextFieldComponent extends MdTextFieldComponent {}
+export class MdFilledTextFieldComponent extends MdTextFieldBase {}

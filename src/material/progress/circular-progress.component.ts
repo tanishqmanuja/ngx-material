@@ -1,13 +1,13 @@
 import "@material/web/progress/circular-progress";
 
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  NgZone,
-  booleanAttribute,
   inject,
+  NgZone,
   numberAttribute,
 } from "@angular/core";
 

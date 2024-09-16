@@ -1,17 +1,26 @@
+import { Directive } from "@angular/core";
+
 import { fromEvent } from "rxjs";
 
-export const proxyInputs = (Cmp: any, inputs: string[]) => {
+export const proxyInputs = (Cmp: any, inputs: Directive["inputs"]) => {
   const Prototype = Cmp.prototype;
-  inputs.forEach(item => {
-    Object.defineProperty(Prototype, item, {
-      get() {
-        return this.el[item];
-      },
-      set(val: any) {
-        this.ngZone.runOutsideAngular(() => (this.el[item] = val));
-      },
+
+  if (!inputs) {
+    return;
+  }
+
+  inputs
+    .map(input => (typeof input === "string" ? input : input.name))
+    .forEach(item => {
+      Object.defineProperty(Prototype, item, {
+        get() {
+          return this.el[item];
+        },
+        set(val: any) {
+          this.ngZone.runOutsideAngular(() => (this.el[item] = val));
+        },
+      });
     });
-  });
 };
 
 export const proxyMethods = (Cmp: any, methods: string[]) => {

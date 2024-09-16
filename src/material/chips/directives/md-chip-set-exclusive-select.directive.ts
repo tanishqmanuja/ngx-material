@@ -9,9 +9,9 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ControlValueAccessor } from "@angular/forms";
 
 import { MdFilterChip } from "@material/web/chips/filter-chip";
-
 import { provideValueAccessor } from "@tqman/ngx-material/internal";
 import { startWith, tap } from "rxjs";
+
 import { MdFilterChipComponent } from "../filter-chip.component";
 
 @Directive({
@@ -33,15 +33,15 @@ export class MdChipSetExclusiveDirective implements ControlValueAccessor {
         takeUntilDestroyed(this.destroyRef),
         startWith(null),
         tap(() => this.writeValue(this.selected)),
-        tap(() => this.registerChips())
+        tap(() => this.registerChips()),
       )
       .subscribe();
   }
 
   registerChips() {
-    this.chips.forEach((chip) => {
+    this.chips.forEach(chip => {
       chip.registerOnTouched(this.onTouched.bind(this));
-      chip.registerOnChange((v) => {
+      chip.registerOnChange(v => {
         this.writeValue(v ? chip.el.ariaValueText : null);
       });
     });
@@ -51,13 +51,13 @@ export class MdChipSetExclusiveDirective implements ControlValueAccessor {
     this.selected = id;
 
     this.chips
-      ?.filter((c) => c.el.ariaValueText !== id)
-      .forEach((c) => c.writeValue(false));
+      ?.filter(c => c.el.ariaValueText !== id)
+      .forEach(c => c.writeValue(false));
 
     if (force) {
       this.chips
-        ?.filter((c) => c.el.ariaValueText === id)
-        .forEach((c) => c.writeValue(true));
+        ?.filter(c => c.el.ariaValueText === id)
+        .forEach(c => c.writeValue(true));
     }
   }
 

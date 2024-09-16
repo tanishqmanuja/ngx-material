@@ -1,158 +1,76 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  NgZone,
-  Renderer2,
-  booleanAttribute,
   inject,
+  NgZone,
+  numberAttribute,
+  Renderer2,
 } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
+
 import type {
   TextField,
   TextFieldType,
   UnsupportedTextFieldType,
 } from "@material/web/textfield/internal/text-field";
+import { ProxyCmp } from "@tqman/ngx-material/internal";
 
+const TEXT_FIELD_INPUTS = [
+  { name: "error", transform: booleanAttribute },
+  { name: "errorText" },
+  { name: "label" },
+  { name: "noAsterisk", transform: booleanAttribute },
+  { name: "required", transform: booleanAttribute },
+  { name: "value" },
+  { name: "prefixText" },
+  { name: "suffixText" },
+  { name: "hasLeadingIcon", transform: booleanAttribute },
+  { name: "hasTrailingIcon", transform: booleanAttribute },
+  { name: "supportingText" },
+  { name: "textDirection" },
+  { name: "rows", transform: numberAttribute },
+  { name: "cols", transform: numberAttribute },
+  { name: "inputMode" },
+  { name: "max" },
+  { name: "maxlength", transform: numberAttribute },
+  { name: "min" },
+  { name: "minlength", transform: numberAttribute },
+  { name: "noSpinner", transform: booleanAttribute },
+  { name: "pattern" },
+  { name: "placeholder" },
+  { name: "readonly", transform: booleanAttribute },
+  { name: "multiple", transform: booleanAttribute },
+  { name: "step" },
+  {
+    name: "type",
+    transform: (v: TextFieldType | UnsupportedTextFieldType) => v,
+  },
+  { name: "autocomplete" },
+  { name: "disabled", transform: booleanAttribute },
+  { name: "name" },
+];
+
+@ProxyCmp({ inputs: TEXT_FIELD_INPUTS })
 @Component({
   selector: "md-text-field",
   template: `<ng-content />`,
-  inputs: [
-    { name: "disabled", transform: booleanAttribute },
-    { name: "error", transform: booleanAttribute },
-    { name: "required", transform: booleanAttribute },
-    { name: "hasLeadingIcon", transform: booleanAttribute },
-    { name: "hasTrailingIcon", transform: booleanAttribute },
-    { name: "value" },
-    { name: "label" },
-    { name: "supportingText" },
-    { name: "errorText" },
-    { name: "type" },
-    { name: "prefixText" },
-    { name: "suffixText" },
-  ],
+  inputs: TEXT_FIELD_INPUTS,
   host: {
     "(change)": "onChange($event.target.value)",
     "(blur)": "onTouched()",
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdTextFieldComponent implements ControlValueAccessor {
-  private el: TextField = inject(ElementRef).nativeElement;
-  private ngZone = inject(NgZone);
+export class MdTextFieldBase implements ControlValueAccessor {
+  protected el: TextField = inject(ElementRef).nativeElement;
+  protected ngZone = inject(NgZone);
   private cdRef = inject(ChangeDetectorRef);
 
   constructor() {
     this.cdRef.detach();
-  }
-
-  get disabled() {
-    return this.el.disabled;
-  }
-  set disabled(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.disabled = v;
-    });
-  }
-
-  get hasLeadingIcon() {
-    return this.el.hasLeadingIcon;
-  }
-  set hasLeadingIcon(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.hasLeadingIcon = v;
-    });
-  }
-
-  get hasTrailingIcon() {
-    return this.el.hasTrailingIcon;
-  }
-  set hasTrailingIcon(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.hasTrailingIcon = v;
-    });
-  }
-
-  get error() {
-    return this.el.error;
-  }
-  set error(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.error = v;
-    });
-  }
-
-  get required() {
-    return this.el.required;
-  }
-  set required(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.required = v;
-    });
-  }
-
-  set value(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.value = v;
-    });
-  }
-  get value() {
-    return this.el.value;
-  }
-
-  set label(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.label = v;
-    });
-  }
-  get label() {
-    return this.el.label;
-  }
-
-  set supportingText(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.supportingText = v;
-    });
-  }
-  get supportingText() {
-    return this.el.supportingText;
-  }
-
-  set errorText(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.errorText = v;
-    });
-  }
-  get errorText() {
-    return this.el.errorText;
-  }
-
-  set suffixText(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.suffixText = v;
-    });
-  }
-  get suffixText() {
-    return this.el.suffixText;
-  }
-
-  set prefixText(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.prefixText = v;
-    });
-  }
-  get prefixText() {
-    return this.el.prefixText;
-  }
-
-  get type() {
-    return this.el.type;
-  }
-  set type(v: TextFieldType | UnsupportedTextFieldType) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.type = v;
-    });
   }
 
   /* Control Value Accessor */

@@ -10,26 +10,32 @@ import {
   NgZone,
   Renderer2,
 } from "@angular/core";
-
 import { ControlValueAccessor } from "@angular/forms";
 
 import type { MdIconButton } from "@material/web/iconbutton/icon-button";
+import type { FormSubmitterType } from "@material/web/internal/controller/form-submitter";
+import { provideValueAccessor, ProxyCmp } from "@tqman/ngx-material/internal";
 
-import { provideValueAccessor } from "@tqman/ngx-material/internal";
+export type LinkTarget = "_blank" | "_parent" | "_self" | "_top";
 
-type LinkTarget = "_blank" | "_parent" | "_self" | "_top";
+const ICON_BUTTON_INPUTS = [
+  { name: "disabled", transform: booleanAttribute },
+  { name: "softDisabled", transform: booleanAttribute },
+  { name: "href" },
+  { name: "target", transform: (v: LinkTarget | "") => v },
+  { name: "ariaLabelSelected" },
+  { name: "toggle", transform: booleanAttribute },
+  { name: "selected", transform: booleanAttribute },
+  { name: "type", transform: (v: FormSubmitterType) => v },
+  { name: "value" },
+];
 
+@ProxyCmp({ inputs: ICON_BUTTON_INPUTS })
 @Component({
   selector: "md-icon-button",
   standalone: true,
   template: `<ng-content />`,
-  inputs: [
-    { name: "selected", transform: booleanAttribute },
-    { name: "disabled", transform: booleanAttribute },
-    { name: "toggle", transform: booleanAttribute },
-    { name: "href" },
-    { name: "target" },
-  ],
+  inputs: ICON_BUTTON_INPUTS,
   host: {
     "(change)": "onChange($event.target.selected)",
     "(blur)": "onTouched()",
@@ -38,57 +44,12 @@ type LinkTarget = "_blank" | "_parent" | "_self" | "_top";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdIconButtonComponent implements ControlValueAccessor {
-  private el: MdIconButton = inject(ElementRef).nativeElement;
-  private ngZone = inject(NgZone);
+  protected el: MdIconButton = inject(ElementRef).nativeElement;
+  protected ngZone = inject(NgZone);
   private cdRef = inject(ChangeDetectorRef);
 
   constructor() {
     this.cdRef.detach();
-  }
-
-  get disabled() {
-    return this.el.disabled;
-  }
-  set disabled(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.disabled = v;
-    });
-  }
-
-  get selected() {
-    return this.el.selected;
-  }
-  set selected(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.selected = v;
-    });
-  }
-
-  get toggle() {
-    return this.el.toggle;
-  }
-  set toggle(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.toggle = v;
-    });
-  }
-
-  get href() {
-    return this.el.href;
-  }
-  set href(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.href = v;
-    });
-  }
-
-  get target() {
-    return this.el.target;
-  }
-  set target(v: "" | LinkTarget) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.target = v;
-    });
   }
 
   /* Control Value Accessor */

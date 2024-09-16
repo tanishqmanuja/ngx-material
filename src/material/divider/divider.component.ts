@@ -1,27 +1,29 @@
 import "@material/web/divider/divider";
 
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  NgZone,
-  booleanAttribute,
   inject,
+  NgZone,
 } from "@angular/core";
 
 import { ProxyCmp } from "@tqman/ngx-material/internal";
 
-@ProxyCmp({ inputs: ["inset", "insetStart", "insetEnd"] })
+const DIVIDER_INPUTS = [
+  { name: "inset", transform: booleanAttribute },
+  { name: "insetStart", transform: booleanAttribute },
+  { name: "insetEnd", transform: booleanAttribute },
+];
+
+@ProxyCmp({ inputs: DIVIDER_INPUTS })
 @Component({
   selector: "md-divider",
   standalone: true,
   template: ` <ng-content />`,
-  inputs: [
-    { name: "inset", transform: booleanAttribute },
-    { name: "insetStart", transform: booleanAttribute },
-    { name: "insetEnd", transform: booleanAttribute },
-  ],
+  inputs: DIVIDER_INPUTS,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdDividerComponent {

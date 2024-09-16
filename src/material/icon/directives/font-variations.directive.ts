@@ -72,7 +72,7 @@ export class MdIconFontVariationsDirective {
       this.el,
       "font-variation-settings",
       fontVariationSettings.join(", "),
-      RendererStyleFlags2.DashCase
+      RendererStyleFlags2.DashCase,
     );
   }
 }

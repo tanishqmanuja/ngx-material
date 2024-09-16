@@ -1,28 +1,31 @@
 import "@material/web/fab/fab";
 
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  NgZone,
-  booleanAttribute,
   inject,
+  NgZone,
 } from "@angular/core";
+
 import type { FabSize, FabVariant, MdFab } from "@material/web/fab/fab";
 import { ProxyCmp } from "@tqman/ngx-material/internal";
 
-@ProxyCmp({ inputs: ["label", "size", "variant", "lowered"] })
+const FAB_INPUTS = [
+  { name: "variant", transform: (v: FabVariant) => v },
+  { name: "size", transform: (v: FabSize) => v },
+  { name: "label", transform: (v: string) => v },
+  { name: "lowered", transform: booleanAttribute },
+];
+
+@ProxyCmp({ inputs: FAB_INPUTS })
 @Component({
   standalone: true,
   selector: "md-fab",
   template: ` <ng-content></ng-content>`,
-  inputs: [
-    { name: "label", transform: (v: string) => v },
-    { name: "size", transform: (v: FabSize) => v },
-    { name: "variant", transform: (v: FabVariant) => v },
-    { name: "lowered", transform: booleanAttribute },
-  ],
+  inputs: FAB_INPUTS,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdFabComponent {

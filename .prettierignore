@@ -1,0 +1,8 @@
+# Ignore all root files
+/*
+
+# Except
+!.prettierrc
+!tsconfig.json
+!angular.json
+!src

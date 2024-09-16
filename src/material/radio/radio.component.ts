@@ -1,79 +1,48 @@
 import "@material/web/radio/radio";
 
 import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
+  inject,
   NgZone,
   Renderer2,
-  booleanAttribute,
-  inject,
 } from "@angular/core";
-
-import { MdRadio } from "@material/web/radio/radio";
-
-import { provideValueAccessor } from "@tqman/ngx-material/internal";
 import { ControlValueAccessor } from "@angular/forms";
 
+import { MdRadio } from "@material/web/radio/radio";
+import { provideValueAccessor, ProxyCmp } from "@tqman/ngx-material/internal";
+
+const RADIO_INPUTS = [
+  { name: "checked", transform: booleanAttribute },
+  { name: "required", transform: booleanAttribute },
+  { name: "value" },
+  { name: "disabled", transform: booleanAttribute },
+  { name: "name" },
+];
+
+@ProxyCmp({ inputs: RADIO_INPUTS })
 @Component({
   selector: "md-radio",
   standalone: true,
   template: ` <ng-content />`,
-  inputs: [
-    { name: "checked", transform: booleanAttribute },
-    { name: "disabled", transform: booleanAttribute },
-    { name: "value" },
-    { name: "name" },
-  ],
+  inputs: RADIO_INPUTS,
   host: {
     "(change)": "onChange($event.target.checked)",
     "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdRadio)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdRadioComponent implements ControlValueAccessor {
-  private el: MdRadio = inject(ElementRef).nativeElement;
-  private ngZone = inject(NgZone);
+  protected el: MdRadio = inject(ElementRef).nativeElement;
+  protected ngZone = inject(NgZone);
   private cdRef = inject(ChangeDetectorRef);
 
   constructor() {
     this.cdRef.detach();
-  }
-
-  get checked() {
-    return this.el.checked;
-  }
-  set checked(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.checked = v;
-    });
-  }
-
-  get disabled() {
-    return this.el.disabled;
-  }
-  set disabled(v) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.disabled = v;
-    });
-  }
-
-  get value() {
-    return this.el.value;
-  }
-  set value(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.value = v;
-    });
-  }
-
-  get name() {
-    return this.el.name;
-  }
-  set name(v: string) {
-    this.ngZone.runOutsideAngular(() => {
-      this.el.name = v;
-    });
   }
 
   /* Control Value Accessor */

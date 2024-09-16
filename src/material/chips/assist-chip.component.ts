@@ -1,26 +1,32 @@
 import "@material/web/chips/assist-chip";
 
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  booleanAttribute,
 } from "@angular/core";
 
 import { ProxyCmp } from "@tqman/ngx-material/internal";
-import { MdChipComponent } from "./internal/chip.component";
 
-type MdAssistChipTarget = "_blank" | "_parent" | "_self" | "_top" | "";
+import { MdChipBase } from "./internal/chip.component";
 
-@ProxyCmp({ inputs: ["elevated", "href", "target"] })
+export type MdAssistChipTarget = "_blank" | "_parent" | "_self" | "_top" | "";
+
+const ASSIST_CHIP_INPUTS = [
+  { name: "elevated", transform: booleanAttribute },
+  { name: "href" },
+  {
+    name: "target",
+    transform: (v: MdAssistChipTarget) => v,
+  },
+];
+
+@ProxyCmp({ inputs: ASSIST_CHIP_INPUTS })
 @Component({
   selector: "md-assist-chip",
   standalone: true,
   template: `<ng-content />`,
-  inputs: [
-    { name: "elevated", transform: booleanAttribute },
-    { name: "href" },
-    { name: "target", transform: (v: string) => v as MdAssistChipTarget },
-  ],
+  inputs: ASSIST_CHIP_INPUTS,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MdAssistChipComponent extends MdChipComponent {}
+export class MdAssistChipComponent extends MdChipBase {}
