@@ -1,6 +1,6 @@
 {
   "name": "@tqman/ngx-material",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "peerDependencies": {
     "@angular/common": "^18.2.4",
     "@angular/core": "^18.2.4",
