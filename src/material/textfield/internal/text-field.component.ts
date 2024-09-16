@@ -59,6 +59,7 @@ const TEXT_FIELD_INPUTS = [
   template: `<ng-content />`,
   inputs: TEXT_FIELD_INPUTS,
   host: {
+    "(input)": "onChange($event.target.value)",
     "(change)": "onChange($event.target.value)",
     "(blur)": "onTouched()",
   },
