@@ -58,6 +58,7 @@ jobs:
 
       - name: Publish
         run: |
+          cp README.md dist/ngx-material
           cd dist/ngx-material
           npm publish
 

@@ -1,3 +1,13 @@
-# ngx-material
+![Logo](https://raw.github.com/tanishqmanuja/static/main/banners/ngx-material.png?maxAge=2592000)
 
-A proof of concept wrapper around [material-web](https://github.com/material-components/material-web)
+<p align=center>"Minimal angular wrapper around lit based material-web."</p>
+
+## 🚀 Installation
+
+```bash
+bun add @tqman/ngx-material
+```
+
+## 🍀 Show your Support
+
+Give a ⭐️ if this project helped you!
