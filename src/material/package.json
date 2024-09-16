@@ -1,6 +1,6 @@
 {
   "name": "@tqman/ngx-material",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Minimal angular wrapper around lit based material-web.",
   "keywords": [
     "angular",
