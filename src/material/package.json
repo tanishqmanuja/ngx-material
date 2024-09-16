@@ -2,10 +2,10 @@
   "name": "@tqman/ngx-material",
   "version": "0.0.6",
   "peerDependencies": {
-    "@angular/common": "^18.1.2",
-    "@angular/core": "^18.1.2",
-    "@material/web": "^2.0.0",
-    "material-symbols": "^0.21.2"
+    "@angular/common": "^18.2.4",
+    "@angular/core": "^18.2.4",
+    "@material/web": "^2.1.0",
+    "material-symbols": "^0.23.0"
   },
   "peerDependenciesMeta": {
     "material-symbols": {
