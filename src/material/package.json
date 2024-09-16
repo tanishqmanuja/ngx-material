@@ -1,6 +1,21 @@
 {
   "name": "@tqman/ngx-material",
   "version": "1.0.1",
+  "description": "Minimal angular wrapper around lit based material-web.",
+  "keywords": [
+    "angular",
+    "material",
+    "wrapper"
+  ],
+  "author": {
+    "name": "tanishqmanuja",
+    "url": "https://github.com/tanishqmanuja",
+    "email": "tanishqmanuja@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanishqmanuja/ngx-material.git"
+  },
   "peerDependencies": {
     "@angular/common": "^18.2.4",
     "@angular/core": "^18.2.4",
@@ -15,8 +30,5 @@
   "dependencies": {
     "tslib": "^2.6.3"
   },
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  }
+  "sideEffects": false
 }

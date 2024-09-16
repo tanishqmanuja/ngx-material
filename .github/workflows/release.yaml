@@ -20,6 +20,7 @@ jobs:
   publish:
     permissions:
       contents: write
+      id-token: write
 
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -60,7 +61,7 @@ jobs:
         run: |
           cp README.md dist/ngx-material
           cd dist/ngx-material
-          npm publish
+          npm publish --provenance --access public 
 
       - name: Commit
         run: |
