@@ -21,10 +21,11 @@ const CHIP_INPUTS = [
 
 @ProxyCmp({ inputs: CHIP_INPUTS })
 @Component({
-  selector: "md-chip",
-  template: `<ng-content />`,
-  inputs: CHIP_INPUTS,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "md-chip",
+    template: `<ng-content />`,
+    inputs: CHIP_INPUTS,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MdChipBase {
   protected el: Chip = inject(ElementRef).nativeElement;

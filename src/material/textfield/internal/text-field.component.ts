@@ -55,15 +55,16 @@ const TEXT_FIELD_INPUTS = [
 
 @ProxyCmp({ inputs: TEXT_FIELD_INPUTS })
 @Component({
-  selector: "md-text-field",
-  template: `<ng-content />`,
-  inputs: TEXT_FIELD_INPUTS,
-  host: {
-    "(input)": "onChange($event.target.value)",
-    "(change)": "onChange($event.target.value)",
-    "(blur)": "onTouched()",
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "md-text-field",
+    template: `<ng-content />`,
+    inputs: TEXT_FIELD_INPUTS,
+    host: {
+        "(input)": "onChange($event.target.value)",
+        "(change)": "onChange($event.target.value)",
+        "(blur)": "onTouched()",
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MdTextFieldBase implements ControlValueAccessor {
   protected el: TextField = inject(ElementRef).nativeElement;
