@@ -27,7 +27,7 @@
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
-    "@material/web": "^2.1.0",
+    "@material/web": "^2.4.1",
     "material-symbols": "^0.23.0",
     "ng-packagr": "^21.0.0",
     "prettier": "^3.3.3",
