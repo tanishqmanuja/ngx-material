@@ -9,8 +9,12 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "@tqman/ngx-material/*": ["./src/material/*"],
-      "@tqman/ngx-material": ["./src/material"]
+      "@tqman/ngx-material/*": [
+        "./src/material/*"
+      ],
+      "@tqman/ngx-material": [
+        "./src/material"
+      ]
     },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
@@ -19,12 +23,15 @@
     "declaration": false,
     "isolatedModules": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"]
+    "lib": [
+      "ES2022",
+      "dom"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

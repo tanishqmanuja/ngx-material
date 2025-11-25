@@ -11,26 +11,26 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.2.15",
-    "@angular/common": "^19.2.15",
-    "@angular/compiler": "^19.2.15",
-    "@angular/core": "^19.2.15",
-    "@angular/forms": "^19.2.15",
-    "@angular/platform-browser": "^19.2.15",
-    "@angular/platform-browser-dynamic": "^19.2.15",
-    "@angular/router": "^19.2.15",
+    "@angular/animations": "^20.3.13",
+    "@angular/common": "^20.3.13",
+    "@angular/compiler": "^20.3.13",
+    "@angular/core": "^20.3.13",
+    "@angular/forms": "^20.3.13",
+    "@angular/platform-browser": "^20.3.13",
+    "@angular/platform-browser-dynamic": "^20.3.13",
+    "@angular/router": "^20.3.13",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.19",
-    "@angular/cli": "^19.2.19",
-    "@angular/compiler-cli": "^19.2.15",
+    "@angular/build": "^20.3.11",
+    "@angular/cli": "^20.3.11",
+    "@angular/compiler-cli": "^20.3.13",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@material/web": "^2.1.0",
     "material-symbols": "^0.23.0",
-    "ng-packagr": "^19.2.2",
+    "ng-packagr": "^20.3.2",
     "prettier": "^3.3.3",
-    "typescript": "~5.5.4"
+    "typescript": "~5.9.3"
   }
 }
