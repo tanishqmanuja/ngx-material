@@ -32,7 +32,7 @@ const CHECKBOX_INPUTS = [
   template: ` <ng-content />`,
   inputs: CHECKBOX_INPUTS,
   host: {
-    "(change)": "onChange($event.target.checked)",
+    "(change)": "handleChange($event)",
     "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdCheckboxComponent)],
@@ -66,5 +66,9 @@ export class MdCheckboxComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean) {
     this.renderer.setProperty(this.el, "disabled", isDisabled);
+  }
+
+  handleChange(event: Event) {
+    this.onChange((event.target as MdCheckbox).checked);
   }
 }

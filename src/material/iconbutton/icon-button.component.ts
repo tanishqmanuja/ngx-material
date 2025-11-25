@@ -37,7 +37,7 @@ const ICON_BUTTON_INPUTS = [
   template: `<ng-content />`,
   inputs: ICON_BUTTON_INPUTS,
   host: {
-    "(change)": "onChange($event.target.selected)",
+    "(change)": "handleChange($event)",
     "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdIconButtonComponent)],
@@ -72,5 +72,9 @@ export class MdIconButtonComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean) {
     this.renderer.setProperty(this.el, "disabled", isDisabled);
+  }
+
+  handleChange(event: Event) {
+    this.onChange((event.target as MdIconButton).selected);
   }
 }

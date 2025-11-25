@@ -28,7 +28,7 @@ const FILTER_CHIP_INPUTS = [
   template: `<ng-content />`,
   inputs: FILTER_CHIP_INPUTS,
   host: {
-    "(click)": "onChange($event.target.selected)",
+    "(click)": "handleClick($event)",
     "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdFilterChipComponent)],
@@ -57,5 +57,9 @@ export class MdFilterChipComponent
 
   setDisabledState(isDisabled: boolean) {
     this.renderer.setProperty(this.el, "disabled", isDisabled);
+  }
+
+  handleClick(event: Event) {
+    this.onChange((event.target as MdFilterChip).selected);
   }
 }

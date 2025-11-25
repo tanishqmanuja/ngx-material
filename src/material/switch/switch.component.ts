@@ -32,7 +32,7 @@ const SWITCH_INPUTS = [
   template: `<ng-content />`,
   inputs: SWITCH_INPUTS,
   host: {
-    "(change)": "onChange($event.target.selected)",
+    "(change)": "handleChange($event)",
     "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdSwitchComponent)],
@@ -67,5 +67,9 @@ export class MdSwitchComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean) {
     this.renderer.setProperty(this.el, "disabled", isDisabled);
+  }
+
+  handleChange(event: Event) {
+    this.onChange((event.target as MdSwitch).selected);
   }
 }

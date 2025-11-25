@@ -30,7 +30,7 @@ const RADIO_INPUTS = [
   template: ` <ng-content />`,
   inputs: RADIO_INPUTS,
   host: {
-    "(change)": "onChange($event.target.checked)",
+    "(change)": "handleChange($event)",
     "(blur)": "onTouched()",
   },
   providers: [provideValueAccessor(MdRadio)],
@@ -65,5 +65,9 @@ export class MdRadioComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean) {
     this.renderer.setProperty(this.el, "disabled", isDisabled);
+  }
+
+  handleChange(event: Event) {
+    this.onChange((event.target as MdRadio).checked);
   }
 }
